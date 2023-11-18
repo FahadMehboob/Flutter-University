@@ -1,5 +1,3 @@
-// Create a simple to-do list app where you can add and remove items.
-
 import 'package:flutter/material.dart';
 import 'package:todo_app/addtask.dart';
 
@@ -14,11 +12,12 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-          primarySwatch: Colors.indigo,
-          hintColor: Colors.grey[700],
-          textSelectionTheme: const TextSelectionThemeData(
-            cursorColor: Colors.black,
-          )),
+        primarySwatch: Colors.indigo,
+        hintColor: Colors.grey[700],
+        textSelectionTheme: const TextSelectionThemeData(
+          cursorColor: Colors.black,
+        ),
+      ),
       home: const HomePage(),
     );
   }
@@ -33,6 +32,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<Task> tasks = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,45 +40,80 @@ class _HomePageState extends State<HomePage> {
         title: const Text("TO-DO APP"),
       ),
       floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add),
-          onPressed: () async {
-            final result = await Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const AddTask(),
-              ),
-            );
-            if (result != null) {
-              setState(() {
-                tasks.add(result);
-              });
-            }
-          }),
+        child: const Icon(Icons.add),
+        onPressed: () async {
+          final result = await Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const AddTask(),
+            ),
+          );
+          if (result != null) {
+            setState(() {
+              tasks.add(result);
+            });
+          }
+        },
+      ),
       body: Material(
         child: ListView.builder(
           itemCount: tasks.length,
           itemBuilder: (context, index) {
-            return Draggable(
-              feedback: ListTile(
-                title: Text(tasks[index].title),
-                subtitle: Text(tasks[index].detail),
-              ),
-              childWhenDragging: Container(
+            return Dismissible(
+              key: UniqueKey(),
+              background: Container(
+                color: Colors.red,
                 child: const ListTile(
-                  title: Text('Delete Task'),
-                  leading: Icon(Icons.delete),
+                  leading: Icon(Icons.delete, color: Colors.white),
                 ),
               ),
-              onDragEnd: (details) {
-                if (details.wasAccepted) {
-                  setState(() {
-                    tasks = List.from(tasks)..removeAt(index);
-                  });
-                }
+              onDismissed: (direction) {
+                setState(() {
+                  tasks.removeAt(index);
+                });
               },
-              child: ListTile(
-                title: Text(tasks[index].title),
-                subtitle: Text(tasks[index].detail),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).primaryColorLight,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: ListTile(
+                    title: Text(
+                      tasks[index].title,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    subtitle: Text(
+                      tasks[index].detail,
+                      style: const TextStyle(fontSize: 18),
+                    ),
+                    trailing: GestureDetector(
+                      onTap: () async {
+                        // Navigate to AddTask with the task for editing
+                        final result = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AddTask(
+                              initialTask: tasks[index],
+                            ),
+                          ),
+                        );
+
+                        // Check if editing was successful and update the task
+                        if (result != null) {
+                          setState(() {
+                            tasks[index] = result;
+                          });
+                        }
+                      },
+                      child: const Icon(Icons.edit),
+                    ),
+                  ),
+                ),
               ),
             );
           },
@@ -86,4 +121,9 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+}
+
+class Task {
+  final String title, detail;
+  Task({required this.title, required this.detail});
 }

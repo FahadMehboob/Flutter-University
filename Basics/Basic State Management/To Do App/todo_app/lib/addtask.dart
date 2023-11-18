@@ -1,15 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/main.dart';
 
 class AddTask extends StatefulWidget {
-  const AddTask({Key? key}) : super(key: key);
+  final Task? initialTask;
+
+  const AddTask({Key? key, this.initialTask}) : super(key: key);
 
   @override
   State<AddTask> createState() => _AddTaskState();
 }
 
 class _AddTaskState extends State<AddTask> {
-  TextEditingController taskTitle = TextEditingController();
-  TextEditingController taskDetail = TextEditingController();
+  late TextEditingController taskTitle;
+  late TextEditingController taskDetail;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Initialize controllers with initial task information if provided
+    taskTitle = TextEditingController(text: widget.initialTask?.title ?? '');
+    taskDetail = TextEditingController(text: widget.initialTask?.detail ?? '');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +53,11 @@ class _AddTaskState extends State<AddTask> {
             height: 40,
           ),
           FilledButton(
-            style: FilledButton.styleFrom(fixedSize: const Size(300, 55)),
             onPressed: () {
-              Navigator.pop(context,
-                  Task(title: taskTitle.text, detail: taskDetail.text));
+              Navigator.pop(
+                context,
+                Task(title: taskTitle.text, detail: taskDetail.text),
+              );
             },
             child: const Text("Add Task"),
           )
@@ -83,7 +96,9 @@ class TaskInput extends StatelessWidget {
           ),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: Theme.of(context).primaryColorDark, width: 2.0),
+              color: Theme.of(context).primaryColorDark,
+              width: 2.0,
+            ),
             borderRadius: BorderRadius.circular(10),
           ),
           hintText: hintText,
@@ -94,7 +109,28 @@ class TaskInput extends StatelessWidget {
   }
 }
 
-class Task {
-  final String title, detail;
-  Task({required this.title, required this.detail});
+class FilledButton extends StatelessWidget {
+  final VoidCallback onPressed;
+  final Widget child;
+
+  const FilledButton({
+    Key? key,
+    required this.onPressed,
+    required this.child,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Theme.of(context).primaryColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        fixedSize: const Size(300, 55),
+      ),
+      child: child,
+    );
+  }
 }
