@@ -10,9 +10,8 @@ A simple and efficient Todo App built with Flutter. Manage your tasks with ease 
 
 ## Screenshots
 
-![Apple iPhone 11 Pro Max Screenshot 1](https://github.com/FahadMehboob/Flutter-University/assets/57399229/3915f11b-7307-40a5-8f52-3dde9cfdb8e7)
-![Apple iPhone 11 Pro Max Screenshot 0](https://github.com/FahadMehboob/Flutter-University/assets/57399229/966f7c28-e04a-420f-a9f1-460fb85cf8ea)
-
+![Apple iPhone 11 Pro Max Screenshot 1](https://github.com/FahadMehboob/Flutter-University/assets/57399229/9d75f70f-7735-476b-b49e-97d1c9d16ffa)
+![Apple iPhone 11 Pro Max Screenshot 0 (1)](https://github.com/FahadMehboob/Flutter-University/assets/57399229/607eacfa-4741-48e2-91a9-3622e9386d6c)
 
 
 ## Getting Started
