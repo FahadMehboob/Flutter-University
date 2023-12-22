@@ -4,10 +4,17 @@ A simple Flutter app that uses the Provider package for state management to crea
 
 ![1](https://github.com/FahadMehboob/Flutter-University/assets/57399229/f3e63df7-5da1-487f-8d6d-dc4b58ef74bc)
 
+# Multi Provider State Management
+
+![Apple iPhone 11 Pro Max Screenshot 1](https://github.com/FahadMehboob/Flutter-University/assets/57399229/69efa45f-8e8e-4857-b908-f144d2770b2e)
+![Apple iPhone 11 Pro Max Screenshot 0](https://github.com/FahadMehboob/Flutter-University/assets/57399229/2f86152a-e817-4194-ae36-dda7e489d109)
+
+
 ## Features
 
 - Automatically increments the count every 2 seconds.
 - Manual count increment via a floating action button.
+- Changes Color Opacity
 
 ## Getting Started
 
