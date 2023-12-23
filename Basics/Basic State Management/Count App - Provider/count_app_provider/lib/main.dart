@@ -1,4 +1,6 @@
+import 'package:count_app_provider/provider/favourite_provider.dart';
 import 'package:count_app_provider/provider/screen_two_provider.dart';
+import 'package:count_app_provider/screens/favourite/favourite_screen.dart';
 import 'package:count_app_provider/screens/home_screen.dart';
 import 'package:count_app_provider/screens/screen_two.dart';
 import 'package:flutter/material.dart';
@@ -19,13 +21,15 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => HomeScreenPorvider()),
         ChangeNotifierProvider(create: (_) => ScreenTwoProvider()),
+        ChangeNotifierProvider(create: (_) => FavouriteItemProvider()),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.deepPurple,
         ),
-        home: const ScreenTwo(),
+        home: const FavouriteScreen(),
       ),
     );
   }
