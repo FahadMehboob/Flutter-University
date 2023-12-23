@@ -26,7 +26,10 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                       builder: (context) => const MyFavouriteItemScreen(),
                     ));
               },
-              child: const Icon(Icons.favorite)),
+              child: const Icon(
+                Icons.favorite,
+                color: Colors.pink,
+              )),
           const SizedBox(width: 20),
         ],
       ),
@@ -48,10 +51,18 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                       },
                       title: Text(
                         "item $index",
+                        style: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       trailing: value.selectedItem.contains(index)
-                          ? const Icon(Icons.favorite)
-                          : const Icon(Icons.favorite_border_outlined),
+                          ? const Icon(
+                              Icons.favorite,
+                              color: Colors.pink,
+                            )
+                          : const Icon(
+                              Icons.favorite_border_outlined,
+                              color: Colors.pink,
+                            ),
                     );
                   },
                 );

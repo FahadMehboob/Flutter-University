@@ -29,8 +29,12 @@ class _MyFavouriteItemScreenState extends State<MyFavouriteItemScreen> {
           return ListTile(
             title: Text(
               "item $itemIndex",
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            trailing: const Icon(Icons.favorite),
+            trailing: const Icon(
+              Icons.favorite,
+              color: Colors.pink,
+            ),
           );
         },
       ),
