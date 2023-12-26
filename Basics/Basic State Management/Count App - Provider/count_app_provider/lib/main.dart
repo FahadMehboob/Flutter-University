@@ -1,5 +1,7 @@
 import 'package:count_app_provider/provider/favourite_provider.dart';
 import 'package:count_app_provider/provider/screen_two_provider.dart';
+import 'package:count_app_provider/provider/theme_changer_provider.dart';
+import 'package:count_app_provider/screens/dark_theme_screen.dart';
 import 'package:count_app_provider/screens/favourite/favourite_screen.dart';
 import 'package:count_app_provider/screens/home_screen.dart';
 import 'package:count_app_provider/screens/screen_two.dart';
@@ -18,19 +20,33 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => HomeScreenPorvider()),
-        ChangeNotifierProvider(create: (_) => ScreenTwoProvider()),
-        ChangeNotifierProvider(create: (_) => FavouriteItemProvider()),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.deepPurple,
-        ),
-        home: const FavouriteScreen(),
-      ),
-    );
+        providers: [
+          ChangeNotifierProvider(create: (_) => HomeScreenPorvider()),
+          ChangeNotifierProvider(create: (_) => ScreenTwoProvider()),
+          ChangeNotifierProvider(create: (_) => FavouriteItemProvider()),
+          ChangeNotifierProvider(
+            create: (_) => ThemeChangerProvider(),
+          )
+        ],
+        child: Builder(
+          builder: (BuildContext context) {
+            final themeChanger = Provider.of<ThemeChangerProvider>(context);
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'Flutter Demo',
+              themeMode: themeChanger.themeMode,
+              theme: ThemeData(
+                brightness: Brightness.light,
+                primarySwatch: Colors.deepPurple,
+              ),
+              darkTheme: ThemeData(
+                brightness: Brightness.dark,
+                primarySwatch: Colors.orange,
+                appBarTheme: const AppBarTheme(color: Colors.amber),
+              ),
+              home: const DarkThemeScreen(),
+            );
+          },
+        ));
   }
 }
