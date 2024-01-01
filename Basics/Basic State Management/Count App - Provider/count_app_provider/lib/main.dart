@@ -4,6 +4,7 @@ import 'package:count_app_provider/provider/theme_changer_provider.dart';
 import 'package:count_app_provider/screens/dark_theme_screen.dart';
 import 'package:count_app_provider/screens/favourite/favourite_screen.dart';
 import 'package:count_app_provider/screens/home_screen.dart';
+import 'package:count_app_provider/screens/notify_listener_screen.dart';
 import 'package:count_app_provider/screens/screen_two.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -24,9 +25,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => HomeScreenPorvider()),
           ChangeNotifierProvider(create: (_) => ScreenTwoProvider()),
           ChangeNotifierProvider(create: (_) => FavouriteItemProvider()),
-          ChangeNotifierProvider(
-            create: (_) => ThemeChangerProvider(),
-          )
+          ChangeNotifierProvider(create: (_) => ThemeChangerProvider()),
         ],
         child: Builder(
           builder: (BuildContext context) {
@@ -44,7 +43,7 @@ class MyApp extends StatelessWidget {
                 primarySwatch: Colors.orange,
                 appBarTheme: const AppBarTheme(color: Colors.amber),
               ),
-              home: const DarkThemeScreen(),
+              home: NotifyListenerScreen(),
             );
           },
         ));
