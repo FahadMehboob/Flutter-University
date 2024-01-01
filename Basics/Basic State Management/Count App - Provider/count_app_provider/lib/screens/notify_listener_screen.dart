@@ -12,7 +12,7 @@ class NotifyListenerScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Stateless As Statefull",
+          "Stateless As Stateful",
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 24.0,
