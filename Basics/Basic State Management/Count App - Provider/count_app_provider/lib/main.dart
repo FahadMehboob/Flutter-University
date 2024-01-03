@@ -1,3 +1,4 @@
+import 'package:count_app_provider/provider/auth_provider.dart';
 import 'package:count_app_provider/provider/favourite_provider.dart';
 import 'package:count_app_provider/provider/screen_two_provider.dart';
 import 'package:count_app_provider/provider/theme_changer_provider.dart';
@@ -9,6 +10,8 @@ import 'package:count_app_provider/screens/screen_two.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:count_app_provider/provider/homescreen_provider.dart';
+
+import 'screens/login_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,6 +29,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => ScreenTwoProvider()),
           ChangeNotifierProvider(create: (_) => FavouriteItemProvider()),
           ChangeNotifierProvider(create: (_) => ThemeChangerProvider()),
+          ChangeNotifierProvider(create: (_) => AuthPtovider()),
         ],
         child: Builder(
           builder: (BuildContext context) {
@@ -43,7 +47,7 @@ class MyApp extends StatelessWidget {
                 primarySwatch: Colors.orange,
                 appBarTheme: const AppBarTheme(color: Colors.amber),
               ),
-              home: NotifyListenerScreen(),
+              home: LoginScreen(),
             );
           },
         ));
